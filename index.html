@@ -7,10 +7,11 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/vs.css">
+		<link rel="stylesheet" href="css/main.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -24,8 +25,31 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>Slide 11</section>
+        <section>
+          <h2>Define action data</h2>
+          <p>All you need to do is to define the action data and call the generated action creators.</p>
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+export const actionData = {
+  artists: {
+    url: 'http://localhost/api/artists'
+  },
+  artist: {
+    url: 'http://localhost/api/artist/{id}'
+  },
+  rate: {
+    url: 'http://localhost/api/updaterate',
+    method: 'post',
+    path: 'artists[id={artistId}].albums[id={albumId}].rate'
+  },
+  //...
+}
+//...
+export default generateActions(actionData);
+            </code></pre>
+          </div>
+        </section>
 			</div>
 		</div>
 
