@@ -1,23 +1,15 @@
 {
-  "name": "reveal.js",
-  "version": "3.6.0",
-  "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
-  "main": "js/reveal.js",
+  "name": "no-redux-talk",
+  "version": "0.1.0",
+  "description": "Slides of the talk about no-redux at react meetup Vancouver.",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
     "build": "grunt"
   },
   "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "name": "Nan Li",
+    "email": "ln613@hotmail.com"
   },
   "engines": {
     "node": ">=4.0.0"
