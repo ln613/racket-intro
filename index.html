@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>no-redux</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/beige.css">
@@ -25,35 +25,274 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 11</section>
+
         <section>
-          <h2>Define action data</h2>
-          <p>All you need to do is to define the action data and call the generated action creators.</p>
+          <h1>no-redux</h1>
+          <h3>Automate all redux flows</h3>
+					<p>
+						<small>Created by <a href="mailto:ln613@hotmail.com">Nan Li</a> / <a href="https://github.com/ln613/no-redux">@github</a></small>
+          </p>
+        </section>
+
+        <section>
+          <ul>
+						<li>Pure/Stateless functions (components)</li>
+						<li>No side effects</li>
+						<li>Immutability</li>
+            <li>Function composition</li>
+            <li>Higher order functions (components)</li>
+            <li>Memoization</li>
+					</ul>          
+        </section>
+
+        <section>
+          <h3>Side Effects</h3>
+          <ul>
+						<li>UI, http, shared state...</li>
+						<li>Pure functions:</li>
+            <ul>
+              <li>Do not modify/read shared states</li>
+              <li>Data in, data out</li>
+              <li>Referential Transparency (Memoization)</li>
+              <li>Easy to test (no mock)</li>
+              <li>Higher code quality, fewer bugs</li>
+            </ul>
+            <li>Push side effects outside your program</li>
+					</ul>          
+        </section>
+
+        <section>
+          <h3>React handles UI side effect</h3>
+          <ul>
+            <li>State in, virtual dom out</li>
+            <li>Stateless components</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Http</h3>
+          <ul>
+            <li>Redux-thunk</li>
+            <ul>
+              <li>Action creator not pure</li>
+            </ul>          
+            <li>Redux-saga</li>
+            <ul>
+              <li>All side effects outside redux flow</li>
+              <li>Only the structure</li>
+            </ul>          
+          </ul>          
+        </section>
+
+        <section>
+          <h3>Cycle.js</h3>
+          <ul>
+            <li>Handle side effects with drivers</li>
+            <ul>
+              <li>DOM driver</li>
+              <li>Http driver</li>
+            </ul>          
+            <li>Redux-cycles</li>
+            <ul>
+              <li>A redux middleware</li>
+              <li>Use cycle.js to handle side effects</li>
+            </ul>          
+            <li>No-redux</li>
+            <ul>
+              <li>Automate redux-cycles</li>
+            </ul>          
+          </ul>          
+        </section>
+
+        <section>
+          <h2>Define Http Actions</h2>
           <div class="flex main">
             <pre class="card"><code class="language-javascript">
 export const actionData = {
   artists: {
     url: 'http://localhost/api/artists'
   },
-  artist: {
-    url: 'http://localhost/api/artist/{id}'
-  },
-  rate: {
-    url: 'http://localhost/api/updaterate',
-    method: 'post',
-    path: 'artists[id={artistId}].albums[id={albumId}].rate'
-  },
   //...
 }
+
 //...
+
 export default generateActions(actionData);
+
+//...
+
+this.props.getArtists();
             </code></pre>
           </div>
         </section>
-			</div>
+
+        <section>
+          <h3>Http Response</h3>
+          <ul>
+            <li>Http Request and Http Response can be treated as two separate events</li>
+            <li>Response in, action out</li>
+            <li>Redecuer: state/action in, state out</li>
+            <li>No-redux</li>
+            <ul>
+              <li>Automate reducers</li>
+              <li>Put reponse/payload directly on redux store</li>
+            </ul>          
+          </ul>          
+        </section>
+    
+        <section>
+          <h3>Selectors</h3>
+          <ul>
+            <li>Raw data on redux store</li>
+            <li>Business logic in selectors</li>
+            <li>Selector composition</li>
+            <li>All selectors are pure functions</li>
+            <li>Memoization for composed selectors</li>
+            <li>No-redux</li>
+            <ul>
+              <li>Memoize selectors similar to reselect</li>
+            </ul>          
+          </ul>          
+        </section>
+
+        <section>
+          <h3>Maintain Immutability</h3>
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+  switch (action.type) {
+    case 'SET_ARTISTS':
+      return {...state, artists: action.payload};
+    //...
+
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>Deeply nested object</h3>
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+  const state = {
+    artists: [
+      {
+        id: 1,
+        name: 'Michael Jackson',
+        albums: [
+          { id: 1, ... },
+          {
+            id: 2,
+            name: 'Thriller',
+            songs: [
+              //...,
+              { id: 5, title: 'Beat It' },
+              //...
+            ]
+          }
+        ]
+      //...
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>Deeply nested object</h3>
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+const song = {...state.artists[0].albums[1].songs[4], title: 'BEAT IT'};
+
+const songs = [...state.artists[0].albums[1].songs];
+songs[4] = song;
+
+const album = {...state.artists[0].albums[1], songs};
+
+const albums = [...state.artists[0].albums];
+albums[1] = album;
+
+const artist = {...state.artists[0], albums};
+
+const artists = [...state.artists];
+artists[0] = artist;
+
+const newState = {...state, artists};
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>Helper libraries</h3>
+          <ul>
+            <li>React Immutability Helper</li>
+            <ul>
+              <li>MongoDB query syntax</li>
+            </ul>          
+            <li>AssocPath from Ramda</li>
+            <ul>
+              <li>Need to find the index of an array item yourself</li>
+            </ul>          
+          </ul>          
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+import { assocPath } from 'ramda';
+
+const newState = assocPath(
+  ['artists', 0, 'albums', 1, 'songs', 4, 'title'],
+  'BEAT IT',
+  state
+);
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3>ipath</h3>
+          <ul>
+            <li>A separate npm package</li>
+            <li>String path</li>
+            <li>Condition for finding an array item</li>
+          </ul>          
+          <div class="flex main">
+            <pre class="card"><code class="language-javascript">
+import { update } from 'ipath';
+
+const newState = update(
+  state,
+  'artists[id=1].albums[name=Thriller].songs[4].title',
+  'BEAT IT'
+);
+            </code></pre>
+          </div>
+					<p>
+						<small><a href="https://github.com/ln613/ipath">https://github.com/ln613/ipath</a></small>
+          </p>
+        </section>
+
+        <section>
+          <h3>Demo</h3>
+        </section>
+
+        <section>
+          <h3>Thanks</h3>
+					<p>
+						<small><a href="https://github.com/ln613/no-redux">no-redux @ https://github.com/ln613/no-redux</a></small>
+          </p>
+					<p>
+						<small><a href="https://github.com/ln613/ipath">ipath @ https://github.com/ln613/ipath</a></small>
+          </p>
+					<p>
+            <small><a href="https://ln613.github.io/no-redux-talk">Slides @ https://ln613.github.io/no-redux-talk</a></small>
+          </p>
+					<p>
+            <small><a href="https://ln613.github.io/no-redux-todo-example">Todo example @ https://ln613.github.io/no-redux-todo-example</a></small>
+          </p>
+					<p>
+            <small><a href="https://ln613.gitbooks.io/no-redux">Documentation @ https://ln613.gitbooks.io/no-redux</a></small>
+          </p>
+        </section>
+
+      </div>
 		</div>
 
-		<script src="lib/js/head.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
 		<script>
