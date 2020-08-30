@@ -1,7 +1,7 @@
 {
-  "name": "no-redux-talk",
+  "name": "racket-intro",
   "version": "0.1.0",
-  "description": "Slides of the talk about no-redux at react meetup Vancouver.",
+  "description": "Racket intro",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
@@ -31,5 +31,8 @@
     "mustache": "^2.3.0",
     "socket.io": "^1.7.3"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@ln613/css": "^1.1.1"
+  }
 }

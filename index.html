@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>no-redux</title>
+		<title>Racket</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/beige.css">
@@ -27,133 +27,236 @@
 			<div class="slides">
 
         <section>
-          <h1>no-redux</h1>
-          <h3>Automate all redux flows</h3>
+          <h1>Racket</h1>
+          <img class="logo" src="https://racket-lang.org/img/racket-logo.svg" style="border: none; box-shadow: none; width: 200px">
 					<p>
-						<small>Created by <a href="mailto:ln613@hotmail.com">Nan Li</a> / <a href="https://github.com/ln613/no-redux">@github</a></small>
+						<small>Created by <a href="mailto:ln613@hotmail.com">Nan Li</a></small>
           </p>
         </section>
 
         <section>
+          <h3>Program</h3>
           <ul>
-						<li>Pure/Stateless functions (components)</li>
-						<li>No side effects</li>
-						<li>Immutability</li>
-            <li>Function composition</li>
-            <li>Higher order functions (components)</li>
-            <li>Memoization</li>
-					</ul>          
-        </section>
-
-        <section>
-          <h3>Side Effects</h3>
-          <ul>
-						<li>UI, http, shared state...</li>
-						<li>Unpredictable</li>
-						<li>Pure functions:</li>
+						<li>An infinite loop of the cycle (world, big-bang):</li>
             <ul>
-              <li>Do not modify/read shared states</li>
-              <li>Data in, data out</li>
-              <li>Referential Transparency (Memoization)</li>
-              <li>Easy to test (no mock)</li>
-              <li>Higher code quality, fewer bugs</li>
+              <li>Wait for data input (from keyboard/mouse/file/db/network/camera/mic/sensor...)</li>
+              <li>Handles the data (calculate/transform/format...)</li>
+              <li>Output the result (to screen/file/db/network/speaker...)</li>
             </ul>
-            <li>Push side effects outside your program</li>
-					</ul>          
+            <li>Example: vttc.ca</li>
+					</ul>
         </section>
 
         <section>
-          <h3>React handles UI side effect</h3>
+          <h3>Porgramming Language</h3>
           <ul>
-            <li>State in, virtual dom out</li>
-            <li>Stateless components</li>
+            <li>Functional Specification (Business Analysis)</li>
+            <ul>
+              <li>Human readable, plain english</li>
+              <li>click addToCart => add current product to cart</li>
+            </ul>
+            <li>Programmer: translate FS to a program using a PL</li>
+            <li>The compiler of the PL compiles the program to CPU instructions</li>
           </ul>
         </section>
 
         <section>
-          <h3>Http</h3>
+          <h3>Types of Porgramming Languages</h3>
           <ul>
-            <li>Redux-thunk</li>
+            <li>Imperative</li>
             <ul>
-              <li>Action creator not pure</li>
+              <li>C, C++, Java, C#, Swift, JavaScript, Python...</li>
+              <li>Object Oriented Programming (OOP)</li>
+              <li>Specify how the computer will do certain tasks</li>
             </ul>          
-            <li>Redux-saga</li>
+            <li>Declarative/Functional</li>
             <ul>
-              <li>All side effects outside redux flow</li>
-              <li>Only the structure</li>
+              <li>Lisp/Scheme/Racket/Clojure, Haskell/Elm...</li>
+              <li>Specify what tasks the computer needs to do</li>
             </ul>          
-          </ul>          
+          </ul>
         </section>
 
         <section>
-          <h3>Cycle.js</h3>
+          <h3>Racket</h3>
           <ul>
-            <li>Handle side effects with drivers</li>
-            <ul>
-              <li>DOM driver</li>
-              <li>Http driver</li>
-            </ul>          
-            <li>Redux-cycles</li>
-            <ul>
-              <li>A redux middleware</li>
-              <li>Use cycle.js to handle side effects</li>
-            </ul>          
-            <li>No-redux</li>
-            <ul>
-              <li>Automate redux-cycles</li>
-            </ul>          
-          </ul>          
+						<li>An educational language</li>
+						<li>Language oriented, can define new languages</li>
+            <li>BSL: a subset of Racket</li>
+            <li>ISL, ASL...</li>
+					</ul>
         </section>
 
         <section>
-          <h2>Define Http Actions</h2>
-          <div class="flex main">
-            <pre class="card"><code class="language-javascript">
-export const actionData = {
-  artists: {
-    url: 'http://localhost/api/artists'
-  },
-  //...
-}
-
-//...
-
-export default generateActions(actionData);
-
-//...
-
-this.props.getArtists();
-            </code></pre>
-          </div>
+          <h3>Program Structure</h3>
+          <ul>
+						<li>Each line is one of:</li>
+            <ul>
+              <li>Definition (define, define-struct)</li>
+              <li>Expression</li>
+              <li>Test case (check-*)</li>
+              <li>Library (require)</li>
+            </ul>
+            <li><a href="https://docs.racket-lang.org/htdp-langs/beginner.html">BSL Doc</a></li>
+          </ul>
         </section>
 
         <section>
-          <h3>Http Response</h3>
+          <h3>Definition</h3>
           <ul>
-            <li>Http Request and Http Response can be treated as two separate events</li>
-            <li>Response in, action out</li>
-            <li>Reducer: state/action in, state out</li>
-            <li>No-redux</li>
+						<li>Function definition</li>
             <ul>
-              <li>Automate reducers</li>
-              <li>Put reponse/payload directly on redux store</li>
-            </ul>          
-          </ul>          
+              <li>(define (name v1 v2 ...) body-expr)</li>
+            </ul>
+  					<li>Constant/Variable definition</li>
+            <ul>
+              <li>(define name expr)</li>
+            </ul>
+  					<li>Structure definition</li>
+            <ul>
+              <li>(define-struct name (field-name ...))</li>
+            </ul>
+          </ul>
         </section>
-    
+
         <section>
-          <h3>Selectors</h3>
+          <h3>Expression</h3>
           <ul>
-            <li>Raw data on redux store</li>
-            <li>Business logic in selectors</li>
-            <li>Selector composition</li>
-            <li>All selectors are pure functions</li>
-            <li>Memoization for composed selectors</li>
-            <li>No-redux</li>
+						<li>Value</li>
             <ul>
-              <li>Memoize selectors similar to reselect</li>
-            </ul>          
-          </ul>          
+              <li>number/string/symbol/boolean/character/list</li>
+              <li>constant/variable</li>
+            </ul>
+  					<li>Function calls</li>
+            <ul>
+              <li>(name expr1 expr2 ...)</li>
+              <li>same number of parameters as definition</li>
+              <li>Primitive functions (+/-/*/string-append/list/car...)</li>
+            </ul>
+            <li>Evaluate to a value</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Order of Evaluation</h3>
+          <ul>
+						<li>Parameter first, left to right</li>
+  					<li>if/cond/and/or</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Number</h3>
+          <ul>
+						<li>exact</li>
+            <ul>
+              <li>integer, rational (2/3), integer complex</li>
+            </ul>
+            <li>inexact</li>
+            <ul>
+              <li>float (1.0), float complex</li>
+            </ul>
+            <li>primitive operations</li>
+            <ul>
+              <li>+, -, *, /, abs, max ..., =, >, < ...</li>
+              <li><a href="https://docs.racket-lang.org/reference/generic-numbers.html">number functions</a></li>
+              <li>number?, integer?, exact?, zero?, inexact->exact ...</li>
+              <li><a href="https://docs.racket-lang.org/reference/number-types.html">number type functions</a></li>
+            </ul>
+					</ul>
+        </section>
+
+        <section>
+          <h3>Boolean</h3>
+          <ul>
+						<li>#t, #f, #true, #false, true, false</li>
+						<li>anything other than #f is true (if 0 ...)</li>
+            <li>primitive operations</li>
+            <ul>
+              <li>boolean?, not, and, or ...</li>
+              <li><a href="https://docs.racket-lang.org/reference/booleans.html">boolean functions</a></li>
+            </ul>
+					</ul>
+        </section>
+
+        <section>
+          <h3>Equality</h3>
+          <ul>
+						<li>eq? is pointer comparison (twins are not equal)</li>
+						<li>equal? structually equal (twins are equal)</li>
+            <ul>
+              <li>(equal? '(1 a) '(1 a)) -> #t</li>
+              <li>"=" is the same as equal? but only works on numbers</li>
+            </ul>
+            <li>eqv?</li>
+            <ul>
+              <li>the same as eq? on string, list</li>
+              <li>the same as equal? on number, character</li>
+              <li>(eqv? (/ 2 3) 2/3) -> #t</li>
+            </ul>
+            <li>(eq? '() '()) -> #t</li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>Character</h3>
+          <ul>
+						<li>#\a</li>
+						<li>char->integer, integer->char</li>
+            <li>Compare: char=?, char&lt;?, char&gt;? ...</li>
+            <li>Category: char-numeric?, char-lower-case? ...</li>
+            <li>Convert: char-upcase, char-downcase ...</li>
+            <li>(eq? #\λ (string-ref "λ" 0))</li>
+            <li><a href="https://docs.racket-lang.org/reference/characters.html">character functions</a></li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>String</h3>
+          <ul>
+						<li>An array of characters, 0 based</li>
+						<li>mutable or immutable</li>
+            <li>Symbol = String, but no twins</li>
+            <li>Basic: string-length, string-ref, string-append, substring, string->list ...</li>
+            <li>Compare: string=?, string&lt;?, string&gt;? ...</li>
+            <li>Convert: string-upcase, string-titlecase ...</li>
+            <li>Other: string-join, string-split, string-replace, string-trim, string-contains? ...</li>
+            <li><a href="https://docs.racket-lang.org/reference/strings.html">string functions</a></li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>Pair & List</h3>
+          <ul>
+						<li>'(1 "a1" a1 #t (a b))</li>
+            <li>Pair: a list with 2 values</li>
+            <li>'() = empty = null</li>
+            <li>Basic: list?, null?, pair?, length, cons, append, list ...</li>
+            <li>Select: list-ref, car/first, cdr/rest, caar, cadr, caaaar ...</li>
+            <li>Lambda: map, andmap, filter, foldl, foldr, sort ...</li>
+            <li><a href="https://docs.racket-lang.org/reference/pairs.html">list functions</a></li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>Struct</h3>
+          <ul>
+						<li>(define-struct point (x y))</li>
+            <li>(define p1 (make-point 3 4))</li>
+            <li>(point-y p1)</li>
+            <li><a href="https://docs.racket-lang.org/reference/structures.html">struct functions</a></li>
+					</ul>
+        </section>
+
+        <section>
+          <h3>How to design functions</h3>
+          <ul>
+						<li>signature</li>
+            <li>purpose statement</li>
+            <li>stub</li>
+            <li>template</li>
+            <li>testing</li>
+					</ul>
         </section>
 
         <section>
@@ -169,107 +272,7 @@ this.props.getArtists();
           </div>
         </section>
 
-        <section>
-          <h3>Deeply nested object</h3>
-          <div class="flex main">
-            <pre class="card"><code class="language-javascript">
-  const state = {
-    artists: [
-      {
-        id: 1,
-        name: 'Michael Jackson',
-        albums: [
-          { id: 1, ... },
-          {
-            id: 2,
-            name: 'Thriller',
-            songs: [
-              //...,
-              { id: 5, title: 'Beat It' },
-              //...
-            ]
-        //...
-            </code></pre>
-          </div>
-        </section>
-
-        <section>
-          <h3>Deeply nested object</h3>
-          <div class="flex main">
-            <pre class="card"><code class="language-javascript">
-const song = {...state.artists[0].albums[1].songs[4], title: 'BEAT IT'};
-
-const songs = [...state.artists[0].albums[1].songs];
-songs[4] = song;
-
-const album = {...state.artists[0].albums[1], songs};
-
-const albums = [...state.artists[0].albums];
-albums[1] = album;
-
-const artist = {...state.artists[0], albums};
-
-const artists = [...state.artists];
-artists[0] = artist;
-
-const newState = {...state, artists};
-            </code></pre>
-          </div>
-        </section>
-
-        <section>
-          <h3>Helper libraries</h3>
-          <ul>
-            <li>React Immutability Helper</li>
-            <ul>
-              <li>MongoDB query syntax</li>
-            </ul>          
-            <li>AssocPath from Ramda</li>
-            <ul>
-              <li>Need to find the index of an array item yourself</li>
-            </ul>          
-          </ul>          
-          <div class="flex main">
-            <pre class="card"><code class="language-javascript">
-import { assocPath } from 'ramda';
-
-const newState = assocPath(
-  ['artists', 0, 'albums', 1, 'songs', 4, 'title'],
-  'BEAT IT',
-  state
-);
-            </code></pre>
-          </div>
-        </section>
-
-        <section>
-          <h3>ipath</h3>
-          <ul>
-            <li>A separate npm package</li>
-            <li>String path</li>
-            <li>Condition for finding an array item</li>
-          </ul>          
-          <div class="flex main">
-            <pre class="card"><code class="language-javascript">
-import { update } from 'ipath';
-
-const newState = update(
-  state,
-  'artists[id=1].albums[name=Thriller].songs[4].title',
-  'BEAT IT'
-);
-            </code></pre>
-          </div>
-					<p>
-						<small><a href="https://github.com/ln613/ipath">https://github.com/ln613/ipath</a></small>
-          </p>
-        </section>
-
-        <section>
-          <h3>Demo</h3>
-        </section>
-
-        <section>
+        <!-- <section>
           <h3>Thanks</h3>
 					<p>
 						<small><a href="https://github.com/ln613/no-redux">no-redux @ https://github.com/ln613/no-redux</a></small>
@@ -286,7 +289,7 @@ const newState = update(
 					<p>
             <small><a href="https://ln613.gitbooks.io/no-redux">Documentation @ https://ln613.gitbooks.io/no-redux</a></small>
           </p>
-        </section>
+        </section> -->
 
       </div>
 		</div>
